@@ -46,19 +46,34 @@ const experiences = [
 
 const projects = [
   {
-    title: "蝦皮自營品牌經營專案",
-    icon: ShoppingBag,
-    description: "自 2022 年起經營自營品牌，透過市場趨勢分析、商品策略與 CRM 經營，累積 3,000+ 訂單與上千則好評。",
+    title: "蝦皮電商成長專案（主打）",
+    images: [
+      "/projects/shopee-design.jpg",
+      "/projects/shopee-sell-data.jpg",
+    ],
+    description:
+      "從選品、頁面設計到數據分析，成功累積 3,000+ 訂單，並透過數據優化提升轉換率與營收表現。",
   },
   {
-    title: "OTOP 地方特色產品推廣專案",
-    icon: Trophy,
-    description: "主導團隊挖掘在地產品「麻芛」USP，轉化為具商業潛力的行銷提案，榮獲全國第三名銅獎。",
+    title: "AI 聊天機器人 / n8n 自動化",
+    images: [
+      "/projects/ai-chat-bot.png",
+      "/projects/analysis-system.png",
+    ],
+    description:
+      "使用 n8n 與 AI 工具建立自動化流程與輿情分析系統，提升營運效率與決策品質。",
   },
   {
-    title: "AI 輿情分析工具",
-    icon: Bot,
-    description: "以 Python 串接 Gemini API，協助自動化分析輿情資料並提升行銷報表產出效率。",
+    title: "義大利東方嘉年華活動影片",
+    video: "/projects/italy-carnival.mp4",
+    description:
+      "負責活動攝影與影片製作，將文化交流轉化為影音內容，點閱突破 1,000 次。",
+  },
+  {
+    title: "GA4 數據分析",
+    image: "/projects/ga4.png",
+    description:
+      "運用 GA4 分析用戶行為與轉換路徑，輔助行銷策略與成效優化。",
   },
 ];
 
@@ -194,24 +209,61 @@ export default function PortfolioWebsite() {
           <div className="mx-auto max-w-6xl px-6">
             <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">Projects</p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">精選專案</h2>
-            <div className="mt-10 grid gap-5 md:grid-cols-3">
+            <div className="mt-10 grid gap-5 md:grid-cols-2">
               {projects.map((project) => {
                 const Icon = project.icon;
                 return (
                   <Card key={project.title} className="rounded-3xl border-slate-200 bg-slate-50 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
                     <CardContent className="p-6">
+                      {/* 多圖片 */}
+                      {project.images && (
+                        <div className="mb-5 grid grid-cols-2 gap-2">
+                          {project.images.map((img) => (
+                            <img
+                              key={img}
+                              src={img}
+                              className="h-32 w-full rounded-xl object-cover"
+                            />
+                          ))}
+                        </div>
+                      )}
+
+                      {/* 單圖片 */}
+                      {project.image && (
+                        <img
+                          src={project.image}
+                          className="mb-5 h-40 w-full rounded-xl object-cover"
+                        />
+                      )}
+
+                      {/* 影片 */}
+                      {project.video && (
+                        <video
+                          src={project.video}
+                          controls
+                          className="mb-5 h-48 w-full rounded-xl object-cover"
+                        />
+                      )}
+
+                      {/* 原本內容 */}
                       <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-sm">
                         <Icon className="h-6 w-6 text-slate-800" />
                       </div>
-                      <h3 className="text-xl font-semibold text-slate-950">{project.title}</h3>
-                      <p className="mt-4 leading-7 text-slate-600">{project.description}</p>
+
+                      <h3 className="text-xl font-semibold text-slate-950">
+                        {project.title}
+                      </h3>
+
+                      <p className="mt-4 leading-7 text-slate-600">
+                        {project.description}
+                      </p>
                     </CardContent>
                   </Card>
                 );
               })}
-            </div>
-          </div>
-        </section>
+                            </div>
+                          </div>
+                        </section>
 
         <section id="contact" className="mx-auto max-w-6xl px-6 py-20">
           <Card className="rounded-[2rem] border-slate-200 bg-slate-950 text-white shadow-xl">
