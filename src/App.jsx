@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { Mail, BarChart3, Search, Bot, ShoppingBag, Globe2, Trophy, ArrowUpRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+export default function PortfolioWebsite() {
+  const [selectedImage, setSelectedImage] = React.useState(null);
 
 const experiences = [
   {
@@ -221,7 +223,8 @@ export default function PortfolioWebsite() {
                             <img
                               key={img}
                               src={img}
-                              className="h-32 w-full rounded-xl object-cover"
+                              onClick={() => setSelectedImage(img)}
+                              className="h-32 w-full rounded-xl object-cover cursor-pointer hover:opacity-80"
                             />
                           ))}
                         </div>
@@ -280,6 +283,17 @@ export default function PortfolioWebsite() {
             </CardContent>
           </Card>
         </section>
+        {selectedImage && (
+  <div
+    onClick={() => setSelectedImage(null)}
+    className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
+  >
+    <img
+      src={selectedImage}
+      className="max-h-[90%] max-w-[90%] rounded-xl"
+    />
+  </div>
+)}
       </main>
 
       <footer className="border-t border-slate-200 py-8 text-center text-sm text-slate-500">
