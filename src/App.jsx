@@ -211,7 +211,6 @@ export default function PortfolioWebsite() {
             <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">精選專案</h2>
             <div className="mt-10 grid gap-5 md:grid-cols-2">
               {projects.map((project) => {
-                const Icon = project.icon;
                 return (
                   <Card key={project.title} className="rounded-3xl border-slate-200 bg-slate-50 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
                     <CardContent className="p-6">
@@ -244,11 +243,6 @@ export default function PortfolioWebsite() {
                           className="mb-5 h-48 w-full rounded-xl object-cover"
                         />
                       )}
-
-                      {/* 原本內容 */}
-                      <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-sm">
-                        <Icon className="h-6 w-6 text-slate-800" />
-                      </div>
 
                       <h3 className="text-xl font-semibold text-slate-950">
                         {project.title}
