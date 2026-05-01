@@ -3,8 +3,6 @@ import { motion } from "framer-motion";
 import { Mail, BarChart3, Search, Bot, ShoppingBag, Globe2, Trophy, ArrowUpRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-export default function PortfolioWebsite() {
-  const [selectedImage, setSelectedImage] = React.useState(null);
 
 const experiences = [
   {
@@ -46,15 +44,14 @@ const experiences = [
   },
 ];
 
-const projects = [
+const mainProjects = [
   {
     title: "蝦皮電商成長專案（主打）",
     images: [
       "/projects/shopee-design.jpg",
       "/projects/shopee-sell-data.jpg",
     ],
-    description:
-      "從選品、頁面設計到數據分析，成功累積 3,000+ 訂單，並透過數據優化提升轉換率與營收表現。",
+    description: "累積 3,000+ 訂單，並透過數據優化提升轉換與營收。",
   },
   {
     title: "AI 聊天機器人 / n8n 自動化",
@@ -62,20 +59,20 @@ const projects = [
       "/projects/ai-chat-bot.png",
       "/projects/analysis-system.png",
     ],
-    description:
-      "使用 n8n 與 AI 工具建立自動化流程與輿情分析系統，提升營運效率與決策品質。",
-  },
-  {
-    title: "義大利東方嘉年華活動影片",
-    video: "/projects/italy-carnival.mp4",
-    description:
-      "負責活動攝影與影片製作，將文化交流轉化為影音內容，點閱突破 1,000 次。",
+    description: "建立自動化流程與分析系統，提升營運效率。",
   },
   {
     title: "GA4 數據分析",
     image: "/projects/ga4.png",
-    description:
-      "運用 GA4 分析用戶行為與轉換路徑，輔助行銷策略與成效優化。",
+    description: "分析用戶行為與轉換路徑，優化行銷策略。",
+  },
+];
+
+const videoProjects = [
+  {
+    title: "義大利東方嘉年華活動影片",
+    video: "/projects/italy-carnival.mp4",
+    description: "負責攝影與影片製作，點閱突破 1,000 次。",
   },
 ];
 
@@ -100,6 +97,8 @@ const stats = [
 ];
 
 export default function PortfolioWebsite() {
+  const [selectedImage, setSelectedImage] = React.useState(null);
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
       <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/80 backdrop-blur-xl">
@@ -211,8 +210,8 @@ export default function PortfolioWebsite() {
           <div className="mx-auto max-w-6xl px-6">
             <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">Projects</p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">精選專案</h2>
-            <div className="mt-10 grid gap-5 md:grid-cols-2">
-              {projects.map((project) => {
+            <div className="mt-10 grid gap-6 md:grid-cols-2">
+              {mainProjects.map((project) => {
                 return (
                   <Card key={project.title} className="rounded-3xl border-slate-200 bg-slate-50 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
                     <CardContent className="p-6">
@@ -258,9 +257,34 @@ export default function PortfolioWebsite() {
                   </Card>
                 );
               })}
-                            </div>
-                          </div>
-                        </section>
+            </div>
+          </div>
+
+          {/* 影音作品 */}
+          <div className="mt-20">
+            <h2 className="text-2xl font-bold mb-6 text-center">
+              影音作品
+            </h2>
+
+            <div className="flex justify-center">
+              {videoProjects.map((project) => (
+                <div key={project.title} className="max-w-xs w-full">
+                  <video
+                    src={project.video}
+                    controls
+                    className="aspect-[9/16] w-full rounded-2xl"
+                  />
+                  <h3 className="mt-4 text-lg font-semibold text-center">
+                    {project.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 mt-2 text-center">
+                    {project.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         <section id="contact" className="mx-auto max-w-6xl px-6 py-20">
           <Card className="rounded-[2rem] border-slate-200 bg-slate-950 text-white shadow-xl">
@@ -283,17 +307,19 @@ export default function PortfolioWebsite() {
             </CardContent>
           </Card>
         </section>
+
+        {/* 圖片 Lightbox */}
         {selectedImage && (
-  <div
-    onClick={() => setSelectedImage(null)}
-    className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
-  >
-    <img
-      src={selectedImage}
-      className="max-h-[90%] max-w-[90%] rounded-xl"
-    />
-  </div>
-)}
+          <div
+            onClick={() => setSelectedImage(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
+          >
+            <img
+              src={selectedImage}
+              className="max-h-[90%] max-w-[90%] rounded-xl"
+            />
+          </div>
+        )}
       </main>
 
       <footer className="border-t border-slate-200 py-8 text-center text-sm text-slate-500">
